@@ -9,11 +9,18 @@ export default class AddButtonController extends DomController {
     this.button = this.createButton();
     this.emitter = emitter;
     this.listenForAddTaskClick();
+    this.listenForTodoCreation();
   }
 
   listenForAddTaskClick() {
     this.emitter.on("addTaskClick", (event) => {
       this.hideButton();
+    });
+  }
+
+  listenForTodoCreation() {
+    this.emitter.on("createTodo", (event) => {
+      this.showButton();
     });
   }
 
@@ -26,7 +33,7 @@ export default class AddButtonController extends DomController {
       [
         this.buildElement("div", {
           innerHTML: PlusIcon,
-          style: "width: 32px; height: 32px;",
+          style: "width: 24px; height: 24px;",
         }),
         this.buildElement("div", {
           class: "inline-flex align-items-center width-100 task-button-styling",

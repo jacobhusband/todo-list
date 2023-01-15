@@ -2,6 +2,7 @@ import DomController from "../modules/domController";
 import AddButtonController from "../modules/addButtonController";
 import FormController from "../modules/formController";
 import TimeController from "../modules/timeController";
+import TodosController from "../modules/todosController";
 
 const EventEmitter = require("events");
 
@@ -12,6 +13,7 @@ export default class App extends DomController {
     this.addButtonController = new AddButtonController(this.emitter);
     this.formController = new FormController(this.emitter);
     this.content = this.constructPage();
+    this.todosController = new TodosController(this.emitter, this.list);
     this.listenForAddTaskClicks();
   }
 
@@ -29,7 +31,7 @@ export default class App extends DomController {
         text: "My To-Do List",
       }),
       this.buildElement("hr", {
-        style: "margin-bottom: 0.75rem;",
+        style: "margin-bottom: 0;",
         size: "2",
         color: "black",
       }),
@@ -37,8 +39,9 @@ export default class App extends DomController {
   }
 
   constructContent() {
+    this.list = this.buildElement("ul", { class: "list_content" });
     return this.buildElement("div", { class: "main_content" }, [
-      this.buildElement("ul", { class: "list_content" }),
+      this.list,
       this.addButtonController.button,
       this.formController.form,
     ]);
