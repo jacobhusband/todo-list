@@ -1,0 +1,50 @@
+/* Semantic */
+
+.header-text {
+  font-size: 2rem;
+}
+
+.page-padding {
+  padding: 2rem;
+}
+
+.task-positioning {
+  margin-left: 0.5rem;
+}
+
+.task-coloring {
+  color: rgb(82, 82, 82);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+.flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.width-100 {
+  width: 100%;
+}
+
+/* Psuedo */
+button:hover,
+a:hover {
+  cursor: pointer;
+}
+
+button.plus_button:hover {
+  fill: rgb(65, 218, 65);
+  color: rgb(65, 218, 65);
+}
+
+/* Media Queries */

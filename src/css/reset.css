@@ -114,3 +114,7 @@ ul,
 ol {
   list-style: none;
 }
+
+button {
+  all: initial;
+}

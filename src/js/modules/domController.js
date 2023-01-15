@@ -4,8 +4,10 @@ export default class DomController {
   buildElement(tag, attr, children) {
     const el = document.createElement(tag);
     Object.entries(attr).forEach(([key, value]) => {
-      if (key === "textContent") {
+      if (key === "text") {
         el.textContent = value;
+      } else if (key === "innerHTML") {
+        el.innerHTML = value;
       } else if (key.includes("dataset")) {
         const datasetKey = key.split("-")[1];
         el.dataset[datasetKey] = value;
