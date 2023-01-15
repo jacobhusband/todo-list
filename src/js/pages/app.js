@@ -1,10 +1,18 @@
 import DomController from "../modules/domController";
-import PlusIcon from "/src/images/plus_icon.svg";
+import AddButtonController from "../modules/addButtonController";
+import FormController from "../modules/formController";
+import TimeController from "../modules/timeController";
+
+const EventEmitter = require("events");
 
 export default class App extends DomController {
   constructor() {
     super();
+    this.emitter = new EventEmitter();
+    this.addButtonController = new AddButtonController(this.emitter);
+    this.formController = new FormController(this.emitter);
     this.content = this.constructPage();
+    this.listenForAddTaskClicks();
   }
 
   constructPage() {
@@ -29,25 +37,16 @@ export default class App extends DomController {
   }
 
   constructContent() {
-    return this.buildElement("div", { class: "list_content flex" }, [
-      this.buildElement(
-        "button",
-        {
-          class: "plus_button inline-flex width-100",
-        },
-        [
-          this.buildElement("div", {
-            innerHTML: PlusIcon,
-            style: "width: 32px; height: 32px;",
-          }),
-          this.buildElement("div", {
-            class:
-              "inline-flex align-items-center width-100 task-positioning task-coloring",
-            text: "Add Task",
-            style: "font-family: Cardo;",
-          }),
-        ]
-      ),
+    return this.buildElement("div", { class: "main_content" }, [
+      this.buildElement("ul", { class: "list_content" }),
+      this.addButtonController.button,
+      this.formController.form,
     ]);
+  }
+
+  listenForAddTaskClicks() {
+    this.addButtonController.button.addEventListener("click", (event) =>
+      this.emitter.emit("addTaskClick", event)
+    );
   }
 }
