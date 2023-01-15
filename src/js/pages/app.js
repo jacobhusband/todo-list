@@ -21,7 +21,7 @@ export default class App extends DomController {
         text: "My To-Do List",
       }),
       this.buildElement("hr", {
-        style: "width: 75%; margin-bottom: 0.75rem;",
+        style: "margin-bottom: 0.75rem;",
         size: "2",
         color: "black",
       }),
@@ -44,6 +44,7 @@ export default class App extends DomController {
             class:
               "inline-flex align-items-center width-100 task-positioning task-coloring",
             text: "Add Task",
+            style: "font-family: Cardo;",
           }),
         ]
       ),

@@ -89,7 +89,7 @@ video {
 
 /* Set font-family and font-size for the entire document */
 body {
-  font-family: Arial, sans-serif;
+  font-family: Cardo, serif;
   font-size: 16px;
 }
 
@@ -101,6 +101,7 @@ h4,
 h5,
 h6 {
   font-weight: normal;
+  font-family: Oswald, sans-serif;
 }
 
 /* Remove default styling for links */
