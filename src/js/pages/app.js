@@ -1,8 +1,7 @@
 import DomController from "../modules/domController";
 import AddButtonController from "../modules/addButtonController";
 import FormController from "../modules/formController";
-import TimeController from "../modules/timeController";
-import TodosController from "../modules/todosController";
+import ProjectController from "../modules/projectController";
 
 const EventEmitter = require("events");
 
@@ -10,11 +9,16 @@ export default class App extends DomController {
   constructor() {
     super();
     this.emitter = new EventEmitter();
+    this.ul = this.constructUl();
     this.addButtonController = new AddButtonController(this.emitter);
     this.formController = new FormController(this.emitter);
+    this.projectController = new ProjectController(this.emitter, this.ul);
     this.content = this.constructPage();
-    this.todosController = new TodosController(this.emitter, this.list);
     this.listenForAddTaskClicks();
+  }
+
+  constructUl() {
+    return this.buildElement("ul", { class: "list_content" });
   }
 
   constructPage() {
@@ -35,15 +39,21 @@ export default class App extends DomController {
         size: "2",
         color: "black",
       }),
+      this.buildElement("div", { class: "project-container flex" }, [
+        this.buildElement("p", {
+          text: `Project: ${this.projectController.currentName}`,
+        }),
+        this.buildElement("button", { text: "My Projects" }),
+      ]),
     ]);
   }
 
   constructContent() {
-    this.list = this.buildElement("ul", { class: "list_content" });
     return this.buildElement("div", { class: "main_content" }, [
-      this.list,
+      this.ul,
       this.addButtonController.button,
       this.formController.form,
+      this.projectController.modal,
     ]);
   }
 

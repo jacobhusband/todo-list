@@ -2,6 +2,7 @@
 
 .header-text {
   font-size: 2rem;
+  margin-top: 1.25rem;
 }
 
 .page-padding {
@@ -27,6 +28,101 @@
   display: flex;
   padding: 0.75rem 0.5rem 0.5rem 0.5rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.144);
+}
+
+.project-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  background-color: rgb(235, 235, 235);
+}
+
+.project-container > button {
+  position: absolute;
+  right: 0;
+  padding: 0.1rem 0.5rem;
+  margin: 0.25rem;
+  border: 1px solid black;
+}
+
+.project-container > p {
+  margin: 0.25rem;
+  padding: 0.1rem 0.5rem;
+}
+
+.modal-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-core {
+  position: relative;
+  text-align: center;
+  width: 250px;
+  height: 200px;
+  background-color: white;
+  padding: 0.5rem;
+  border-radius: 0.1rem;
+}
+
+.modal-core .exit {
+  padding: 0.5rem;
+  margin: 0.25rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.modal-core li {
+  font-size: 0.9rem;
+}
+
+.modal-footer {
+  width: 250px;
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: "new-input new-button";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: rgb(238, 238, 238);
+  padding: 0.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.562);
+}
+
+.modal-footer input {
+  padding: 0 0.3rem;
+  font-size: 0.9rem;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.26);
+  border-radius: 0.1rem;
+}
+
+.modal-core .new-input {
+  grid-area: new-input;
+  width: 100%;
+}
+
+.modal-core .new-button {
+  grid-area: new-button;
+  width: 80%;
+  margin-left: auto;
+  background-color: aliceblue;
+  border: 1px solid rgba(0, 0, 0, 0.562);
+  border-radius: 0.1rem;
+}
+
+.modal-core .new-button > div {
+  margin: auto;
 }
 
 .text-center {
@@ -70,9 +166,10 @@ button.plus_button:hover {
   color: rgb(65, 218, 65);
 }
 
-.task-input-styling:focus {
+.task-input-styling:focus,
+.modal-footer input:focus {
   outline: none;
-  border-bottom: 1px solid black;
+  border: 1px solid rgba(0, 0, 0, 0.562);
 }
 
 /* Media Queries */
