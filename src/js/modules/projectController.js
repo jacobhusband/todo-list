@@ -12,7 +12,37 @@ export default class ProjectController extends DomController {
     this.projects = [
       { [this.currentName]: new TodosController(this.emitter, this.ul) },
     ];
+    this.button = this.constructProjectButton();
     this.modal = this.createModal();
+    this.listenForExitClicks();
+    this.listenForProjectButtonClicks();
+  }
+
+  constructProjectButton() {
+    return this.buildElement("button", {
+      class: "my-projects",
+      text: "Projects",
+    });
+  }
+
+  listenForProjectButtonClicks() {
+    this.emitter.on("projectsClick", () => {
+      this.showModal();
+    });
+  }
+
+  listenForExitClicks() {
+    this.modal.querySelector("button.exit").addEventListener("click", () => {
+      this.hideModal();
+    });
+  }
+
+  showModal() {
+    this.modal.classList.remove("hidden");
+  }
+
+  hideModal() {
+    this.modal.classList.add("hidden");
   }
 
   createModal() {

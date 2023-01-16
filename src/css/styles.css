@@ -2,7 +2,7 @@
 
 .header-text {
   font-size: 2rem;
-  margin-top: 1.25rem;
+  margin-top: 1.5rem;
 }
 
 .page-padding {
@@ -35,20 +35,25 @@
   top: 0;
   right: 0;
   left: 0;
-  background-color: rgb(235, 235, 235);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.295);
 }
 
 .project-container > button {
   position: absolute;
   right: 0;
   padding: 0.1rem 0.5rem;
-  margin: 0.25rem;
+  margin: 0.3rem 0.35rem;
   border: 1px solid black;
 }
 
 .project-container > p {
   margin: 0.25rem;
   padding: 0.1rem 0.5rem;
+}
+
+.project-container .my-projects {
+  background-color: rgba(118, 255, 255, 0.137);
+  border-radius: 0.1rem;
 }
 
 .modal-container {

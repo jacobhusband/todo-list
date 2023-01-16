@@ -15,6 +15,7 @@ export default class App extends DomController {
     this.projectController = new ProjectController(this.emitter, this.ul);
     this.content = this.constructPage();
     this.listenForAddTaskClicks();
+    this.listenForProjectsClicks();
   }
 
   constructUl() {
@@ -43,7 +44,7 @@ export default class App extends DomController {
         this.buildElement("p", {
           text: `Project: ${this.projectController.currentName}`,
         }),
-        this.buildElement("button", { text: "My Projects" }),
+        this.projectController.button,
       ]),
     ]);
   }
@@ -61,5 +62,11 @@ export default class App extends DomController {
     this.addButtonController.button.addEventListener("click", (event) =>
       this.emitter.emit("addTaskClick", event)
     );
+  }
+
+  listenForProjectsClicks() {
+    this.projectController.button.addEventListener("click", (event) => {
+      this.emitter.emit("projectsClick", event);
+    });
   }
 }
