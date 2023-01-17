@@ -2,6 +2,7 @@ import DomController from "./domController";
 import TodosController from "./todosController";
 import ExitIcon from "/src/images/exit_icon.svg";
 import PlusIcon from "/src/images/plus_icon.svg";
+import ProjectIcon from "/src/images/project_icon.svg";
 
 export default class ProjectController extends DomController {
   constructor(emitter, ul, name) {
@@ -9,20 +10,72 @@ export default class ProjectController extends DomController {
     this.emitter = emitter;
     this.ul = ul;
     this.currentName = name || "Default";
-    this.projects = [
-      { [this.currentName]: new TodosController(this.emitter, this.ul) },
-    ];
+    this.nextId = 0;
+    this.projects = this.createInitialProject();
     this.button = this.constructProjectButton();
+    this.form = this.createForm();
     this.modal = this.createModal();
+    this.list = this.modal.querySelector(".project-list");
     this.listenForExitClicks();
     this.listenForProjectButtonClicks();
+    this.listenForFormSubmits();
+    this.listenForProjectListClicks();
+  }
+
+  listenForProjectListClicks() {
+    this.list.addEventListener("click", (event) => {
+      if (this.currentName === event.target.textContent) return;
+      this.removeColor();
+      this.currentName = event.target.textContent;
+      event.target.style = "background-color: #EADAA2;";
+    });
+  }
+
+  removeColor() {
+    for (let i = 0; i < this.list.children.length; i++) {
+      this.list.children[i].style = "";
+    }
+  }
+
+  createInitialProject() {
+    return [
+      {
+        [this.currentName]: new TodosController(
+          this.emitter,
+          this.ul,
+          this,
+          this.currentName,
+          this.nextId
+        ),
+      },
+    ];
+  }
+
+  createForm() {
+    return this.buildElement("form", { class: "modal-footer" }, [
+      this.buildElement("input", { class: "new-input" }),
+      this.buildElement("button", { class: "new-button" }, [
+        this.buildElement("div", {
+          innerHTML: PlusIcon,
+          style: "width: 24px; height: 24px;",
+        }),
+      ]),
+    ]);
   }
 
   constructProjectButton() {
-    return this.buildElement("button", {
-      class: "my-projects",
-      text: "Projects",
-    });
+    return this.buildElement(
+      "button",
+      {
+        class: "my-projects",
+      },
+      [
+        this.buildElement("div", {
+          innerHTML: ProjectIcon,
+          style: "width: 32px; height: 32px;",
+        }),
+      ]
+    );
   }
 
   listenForProjectButtonClicks() {
@@ -34,6 +87,18 @@ export default class ProjectController extends DomController {
   listenForExitClicks() {
     this.modal.querySelector("button.exit").addEventListener("click", () => {
       this.hideModal();
+    });
+  }
+
+  listenForFormSubmits() {
+    this.form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const projName = event.target.elements[0].value;
+      this.projects.push({
+        [projName]: new TodosController(this.emitter, this.ul, this, projName),
+      });
+      this.list.appendChild(this.createProject(projName));
+      this.form.reset();
     });
   }
 
@@ -56,15 +121,7 @@ export default class ProjectController extends DomController {
           class: "exit",
         }),
         this.createProjects(),
-        this.buildElement("div", { class: "modal-footer" }, [
-          this.buildElement("input", { class: "new-input" }),
-          this.buildElement("button", { class: "new-button" }, [
-            this.buildElement("div", {
-              innerHTML: PlusIcon,
-              style: "width: 24px; height: 24px;",
-            }),
-          ]),
-        ]),
+        this.form,
       ]),
     ]);
   }
@@ -75,12 +132,18 @@ export default class ProjectController extends DomController {
       ...this.projects.map((projObj) => {
         text = Object.keys(projObj)[0];
         if (text === this.currentName) bgColor = "background-color: #EADAA2;";
-        return this.buildElement("li", {
-          class: "project-name",
-          text: text,
-          style: bgColor,
-        });
+        return this.createProject(text, bgColor);
       }),
     ]);
+  }
+
+  createProject(name, bgColor = "") {
+    ++this.nextId;
+    return this.buildElement("li", {
+      class: "project-name",
+      text: name,
+      style: bgColor,
+      "data-id": this.nextId,
+    });
   }
 }

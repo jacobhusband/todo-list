@@ -1,17 +1,20 @@
 import DomController from "./domController";
 
 export default class TodosController extends DomController {
-  constructor(emitter, ul) {
+  constructor(emitter, ul, projectParent, projName) {
     super();
     this.emitter = emitter;
     this.ul = ul;
     this.todos = [];
+    this.projectParent = projectParent;
+    this.projName = projName;
     this.listenForTodoCreation();
   }
 
   listenForTodoCreation() {
     this.emitter.on("createTodo", (todo) => {
-      if (todo.length === 0) return;
+      if (todo.length === 0 || this.projectParent.currentName !== this.projName)
+        return;
       this.todos.push(todo);
       this.text = todo;
       this.dom = this.createTodo(todo);

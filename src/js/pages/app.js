@@ -11,8 +11,8 @@ export default class App extends DomController {
     this.emitter = new EventEmitter();
     this.ul = this.constructUl();
     this.addButtonController = new AddButtonController(this.emitter);
-    this.formController = new FormController(this.emitter);
     this.projectController = new ProjectController(this.emitter, this.ul);
+    this.formController = new FormController(this.emitter);
     this.content = this.constructPage();
     this.listenForAddTaskClicks();
     this.listenForProjectsClicks();
@@ -42,7 +42,7 @@ export default class App extends DomController {
       }),
       this.buildElement("div", { class: "project-container flex" }, [
         this.buildElement("p", {
-          text: `Project: ${this.projectController.currentName}`,
+          text: `Current Project - ${this.projectController.currentName}`,
         }),
         this.projectController.button,
       ]),
@@ -59,8 +59,8 @@ export default class App extends DomController {
   }
 
   listenForAddTaskClicks() {
-    this.addButtonController.button.addEventListener("click", (event) =>
-      this.emitter.emit("addTaskClick", event)
+    this.addButtonController.button.addEventListener("click", () =>
+      this.emitter.emit("addTaskClick", this.projectController.currentName)
     );
   }
 
