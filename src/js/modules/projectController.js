@@ -1,10 +1,10 @@
-import DomController from "./domController";
-import TodosController from "./todosController";
+import DomElementCreator from "./domElementCreator";
+import TodoController from "./todoController";
 import ExitIcon from "/src/images/exit_icon.svg";
 import PlusIcon from "/src/images/plus_icon.svg";
 import ProjectIcon from "/src/images/project_icon.svg";
 
-export default class ProjectController extends DomController {
+export default class ProjectController extends DomElementCreator {
   constructor(emitter, ul, name) {
     super();
     this.emitter = emitter;
@@ -40,7 +40,7 @@ export default class ProjectController extends DomController {
   createInitialProject() {
     return [
       {
-        [this.currentName]: new TodosController(
+        [this.currentName]: new TodoController(
           this.emitter,
           this.ul,
           this,
@@ -111,7 +111,7 @@ export default class ProjectController extends DomController {
   }
 
   createModal() {
-    return this.buildElement("div", { class: "modal-container" }, [
+    return this.buildElement("div", { class: "modal-container hidden" }, [
       this.buildElement("div", { class: "modal-core" }, [
         this.buildElement("h2", { text: "My Projects" }),
         this.buildElement("hr", { class: "modal-hr " }),

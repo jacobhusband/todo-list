@@ -1,11 +1,11 @@
-import DomController from "../modules/domController";
 import AddButtonController from "../modules/addButtonController";
+import DomElementCreator from "../modules/domElementCreator";
 import FormController from "../modules/formController";
 import ProjectController from "../modules/projectController";
 
 const EventEmitter = require("events");
 
-export default class App extends DomController {
+export default class App extends DomElementCreator {
   constructor() {
     super();
     this.emitter = new EventEmitter();

@@ -1,6 +1,6 @@
-import DomController from "./domController";
+import DomElementCreator from "./domElementCreator";
 
-export default class FormController extends DomController {
+export default class FormController extends DomElementCreator {
   constructor(emitter) {
     super();
     this.emitter = emitter;

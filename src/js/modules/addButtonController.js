@@ -1,9 +1,7 @@
-import DomController from "./domController";
+import DomElementCreator from "./domElementCreator";
 import PlusIcon from "/src/images/plus_icon.svg";
 
-const EventEmitter = require("events");
-
-export default class AddButtonController extends DomController {
+export default class AddButtonController extends DomElementCreator {
   constructor(emitter) {
     super();
     this.button = this.createButton();

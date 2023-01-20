@@ -175,6 +175,10 @@ button.plus_button:hover {
   border: 1px solid rgba(0, 0, 0, 0.562);
 }
 
+.modal-core li:hover {
+  cursor: pointer;
+}
+
 .task-input-styling:focus {
   outline: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.562);

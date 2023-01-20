@@ -1,8 +1,18 @@
-export default class DomController {
+export default class DomElementCreator {
   constructor() {}
 
   buildElement(tag, attr, children) {
-    const el = document.createElement(tag);
+    const el = this.makeElement(tag);
+    this.addAttributesToElement(el, attr);
+    this.addChildrenToElement(el, children);
+    return el;
+  }
+
+  makeElement(tag) {
+    return document.createElement(tag);
+  }
+
+  addAttributesToElement(el, attr) {
     Object.entries(attr).forEach(([key, value]) => {
       if (key === "text") {
         el.textContent = value;
@@ -15,6 +25,9 @@ export default class DomController {
         el.setAttribute(key, value);
       }
     });
+  }
+
+  addChildrenToElement(el, children) {
     if (children) {
       children.forEach((child) => {
         if (child) {
@@ -22,6 +35,5 @@ export default class DomController {
         }
       });
     }
-    return el;
   }
 }

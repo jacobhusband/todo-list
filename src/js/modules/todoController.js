@@ -1,6 +1,6 @@
-import DomController from "./domController";
+import DomElementCreator from "./domElementCreator";
 
-export default class TodosController extends DomController {
+export default class TodoController extends DomElementCreator {
   constructor(emitter, ul, projectParent, projName) {
     super();
     this.emitter = emitter;
