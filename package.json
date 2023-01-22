@@ -2,7 +2,7 @@
   "name": "todo-list",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --mode development",
@@ -28,8 +28,11 @@
     "@babel/core": "^7.20.12",
     "css-loader": "^6.7.3",
     "html-webpack-plugin": "^5.5.0",
+    "source-map-loader": "^4.0.1",
     "style-loader": "^3.3.1",
     "svg-inline-loader": "^0.8.2",
+    "ts-loader": "^9.4.2",
+    "typescript": "^4.9.4",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1"
   }
