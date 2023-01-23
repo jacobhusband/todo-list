@@ -20,6 +20,15 @@ export default class EventManager {
     this.listenForFormSubmits();
     this.listenForCheckboxClicks();
     this.listenForRemoveCheckedButtonClicks();
+    this.listenForEnterKeyDown();
+  }
+
+  listenForEnterKeyDown() {
+    window.addEventListener("keyup", (event: KeyboardEvent) => {
+      if (event.key === "Enter") {
+        this.hideBtnShowIptAndFocus();
+      }
+    });
   }
 
   listenForRemoveCheckedButtonClicks() {
@@ -61,9 +70,13 @@ export default class EventManager {
 
   listenForTaskButtonClicks() {
     this.addTaskBtn?.addEventListener("click", () => {
-      this.hideInputShowBtn();
-      this.focusInput();
+      this.hideBtnShowIptAndFocus();
     });
+  }
+
+  hideBtnShowIptAndFocus() {
+    this.hideBtnShowIpt();
+    this.focusInput();
   }
 
   listenForInputBlur() {
@@ -80,7 +93,7 @@ export default class EventManager {
   }
 
   createTask() {
-    this.hideBtnShowInput();
+    this.hideIptShowBtn();
 
     const task: string | undefined = this.addTaskInput?.value;
 
@@ -92,12 +105,12 @@ export default class EventManager {
     this.addTaskForm?.reset();
   }
 
-  hideBtnShowInput(): void {
+  hideIptShowBtn(): void {
     this.addTaskBtn?.classList.remove("hidden");
     this.addTaskInput?.classList.add("hidden");
   }
 
-  hideInputShowBtn(): void {
+  hideBtnShowIpt(): void {
     this.addTaskBtn?.classList.add("hidden");
     this.addTaskInput?.classList.remove("hidden");
   }
