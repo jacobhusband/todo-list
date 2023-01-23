@@ -11,3 +11,5 @@ const emitter = new EventEmitter();
 const tm = new TaskManager(emitter);
 const em = new EventManager(emitter);
 const uim = new UIManager(emitter);
+
+export { tm, em, uim };
