@@ -1,15 +1,12 @@
 import { uim, tm } from "..";
 
-const { EventEmitter } = require("events");
-
 export default class EventManager {
   addTaskBtn: HTMLButtonElement | null;
   addTaskInput: HTMLInputElement | null;
   taskListEl: HTMLUListElement | null;
   addTaskForm: HTMLFormElement | null;
 
-  constructor(private emitter: typeof EventEmitter) {
-    this.emitter = emitter;
+  constructor() {
     this.addTaskBtn = document.querySelector("button.plus_button");
     this.taskListEl = document.querySelector("ul.list_content");
     this.addTaskInput = document.querySelector("input.add_task");

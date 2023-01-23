@@ -1,9 +1,7 @@
-const { EventEmitter } = require("events");
-
 export default class TaskManager {
   tasks: { title: string; completed: boolean }[];
-  constructor(private emitter: typeof EventEmitter) {
-    this.emitter = emitter;
+
+  constructor() {
     this.tasks = [];
   }
 

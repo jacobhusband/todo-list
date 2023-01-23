@@ -6,10 +6,8 @@ import TaskManager from "./js/taskManager";
 import EventManager from "./js/eventManager";
 import UIManager from "./js/uiManager";
 
-const emitter = new EventEmitter();
-
-const tm = new TaskManager(emitter);
-const em = new EventManager(emitter);
-const uim = new UIManager(emitter);
+const tm = new TaskManager();
+const em = new EventManager();
+const uim = new UIManager();
 
 export { tm, em, uim };

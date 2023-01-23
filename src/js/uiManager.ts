@@ -1,18 +1,25 @@
 import { tm } from "..";
-const { EventEmitter } = require("events");
 
 export default class UIManager {
   taskListEl: HTMLUListElement | null;
 
-  constructor(private emitter: typeof EventEmitter) {
-    this.emitter = emitter;
+  constructor() {
     this.renderTasks = this.renderTasks.bind(this);
     this.taskListEl = document.querySelector("ul.list_content");
   }
 
-  #createTaskElement = (title: string): Node => {
+  #createTaskElement = (task: { title: string; completed: boolean }): Node => {
     const taskEl = document.createElement("li");
-    taskEl.innerText = title;
+    const checkboxEl = document.createElement("input");
+    const spanEl = document.createElement("span");
+
+    checkboxEl.type = "checkbox";
+    checkboxEl.checked = task.completed;
+    spanEl.innerText = task.title;
+
+    taskEl.appendChild(checkboxEl);
+    taskEl.appendChild(spanEl);
+
     return taskEl;
   };
 
@@ -22,7 +29,7 @@ export default class UIManager {
     }
 
     tm.getTasks().forEach((task) => {
-      this.taskListEl?.appendChild(this.#createTaskElement(task.title));
+      this.taskListEl?.appendChild(this.#createTaskElement(task));
     });
   };
 }
