@@ -2,10 +2,12 @@ import { tm } from "..";
 
 export default class UIManager {
   taskListEl: HTMLUListElement | null;
+  removeCheckedBtn: HTMLButtonElement | null;
 
   constructor() {
     this.renderTasks = this.renderTasks.bind(this);
     this.taskListEl = document.querySelector("ul.list_content");
+    this.removeCheckedBtn = document.querySelector("button.remove_checked");
   }
 
   #createTaskElement = (task: { title: string; completed: boolean }): Node => {
@@ -28,8 +30,18 @@ export default class UIManager {
       this.taskListEl.innerHTML = "";
     }
 
-    tm.getTasks().forEach((task) => {
+    const tasks = tm.getTasks();
+
+    tasks.forEach((task) => {
       this.taskListEl?.appendChild(this.#createTaskElement(task));
     });
+  };
+
+  showRemoveCheckedButton = () => {
+    this.removeCheckedBtn?.classList.remove("hidden");
+  };
+
+  hideRemoveCheckedButton = () => {
+    this.removeCheckedBtn?.classList.add("hidden");
   };
 }

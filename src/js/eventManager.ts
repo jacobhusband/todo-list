@@ -5,15 +5,58 @@ export default class EventManager {
   addTaskInput: HTMLInputElement | null;
   taskListEl: HTMLUListElement | null;
   addTaskForm: HTMLFormElement | null;
+  removeCheckedBtn: HTMLButtonElement | null;
+  checkedAmount: number;
 
   constructor() {
     this.addTaskBtn = document.querySelector("button.plus_button");
     this.taskListEl = document.querySelector("ul.list_content");
     this.addTaskInput = document.querySelector("input.add_task");
     this.addTaskForm = document.querySelector("form.task_adder");
+    this.removeCheckedBtn = document.querySelector("button.remove_checked");
+    this.checkedAmount = 0;
     this.listenForTaskButtonClicks();
     this.listenForInputBlur();
     this.listenForFormSubmits();
+    this.listenForCheckboxClicks();
+    this.listenForRemoveCheckedButtonClicks();
+  }
+
+  listenForRemoveCheckedButtonClicks() {
+    this.removeCheckedBtn?.addEventListener("click", () => {
+      tm.removeCompletedTasks();
+      uim.hideRemoveCheckedButton();
+      uim.renderTasks();
+    });
+  }
+
+  listenForCheckboxClicks() {
+    this.taskListEl?.addEventListener("click", (event) => {
+      if (event.target instanceof HTMLInputElement && this.taskListEl) {
+        const parent = event.target.parentElement;
+        if (parent !== null) {
+          const index = Array.from(this.taskListEl.children).indexOf(parent);
+          const title = parent.lastElementChild?.textContent;
+          const completed = event.target.checked;
+
+          if (title) {
+            tm.updateTask(index, title, completed);
+          }
+
+          if (completed) {
+            this.increaseChecked();
+          } else {
+            this.decreaseChecked();
+          }
+
+          if (this.checkedAmount > 0) {
+            uim.showRemoveCheckedButton();
+          } else {
+            uim.hideRemoveCheckedButton();
+          }
+        }
+      }
+    });
   }
 
   listenForTaskButtonClicks() {
@@ -61,5 +104,17 @@ export default class EventManager {
 
   focusInput(): void {
     this.addTaskInput?.focus();
+  }
+
+  increaseChecked(): void {
+    ++this.checkedAmount;
+  }
+
+  decreaseChecked(): void {
+    --this.checkedAmount;
+  }
+
+  getCheckedAmount(): number {
+    return this.checkedAmount;
   }
 }

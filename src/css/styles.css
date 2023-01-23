@@ -1,5 +1,9 @@
 /* Semantic */
 
+.header {
+  position: relative;
+}
+
 .header-text {
   font-size: 2rem;
 }
@@ -15,6 +19,16 @@
 .task-button-styling {
   margin-left: 0.5rem;
   color: rgb(82, 82, 82);
+}
+
+.header .remove_checked {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 0.25rem 1rem;
+  margin: 0.075rem 0;
+  border: 1px solid black;
+  background-color: rgb(240, 192, 192);
 }
 
 input.add_task {
