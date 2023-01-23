@@ -2,6 +2,7 @@
 
 .header {
   position: relative;
+  margin-top: 1.5rem;
 }
 
 .header-text {
@@ -14,6 +15,28 @@
 
 .plus_button {
   margin: 0.5rem;
+}
+
+.header-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  border-bottom: 1px solid black;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+
+.header-bar select {
+  border: none;
+  text-align: end;
+  margin: 0.25rem 0.5rem;
+}
+
+.header-bar .project-text {
+  border-right: 1px solid black;
+  padding: 0.25rem 0.5rem;
 }
 
 .task-button-styling {
@@ -89,6 +112,10 @@ button.plus_button:hover {
 input.add_task:focus {
   outline: none;
   border-bottom: 1px solid black;
+}
+
+.header-bar select:focus {
+  outline: none;
 }
 
 /* Media Queries */

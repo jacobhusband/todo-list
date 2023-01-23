@@ -37,6 +37,8 @@ export default class UIManager {
     });
   };
 
+  renderProjectName = () => {};
+
   showRemoveCheckedButton = () => {
     this.removeCheckedBtn?.classList.remove("hidden");
   };

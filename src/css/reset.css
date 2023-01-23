@@ -94,7 +94,9 @@ video {
 /* Set font-family and font-size for the entire document */
 body,
 form,
-input {
+input,
+select,
+option {
   font-family: Cardo, serif;
   font-size: 16px;
 }

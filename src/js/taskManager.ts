@@ -27,6 +27,12 @@ export default class TaskManager {
 
   getTasks = () => this.tasks;
 
+  setName = (name: string): void => {
+    this.name = name;
+  };
+
+  getName = () => this.name;
+
   removeCompletedTasks = () => {
     const tempTasks: { title: string; completed: boolean }[] = [];
     this.tasks.forEach((task) => {
