@@ -12,6 +12,7 @@ export default class TaskManager {
       title,
       completed: false,
     });
+    console.log(this.tasks);
   };
 
   updateTask = (index: number, title: string) => {
