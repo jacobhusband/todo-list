@@ -6,6 +6,7 @@ export default class EventManager {
   taskListEl: HTMLUListElement | null;
   addTaskForm: HTMLFormElement | null;
   removeCheckedBtn: HTMLButtonElement | null;
+  options: HTMLSelectElement | null;
   checkedAmount: number;
 
   constructor() {
@@ -14,13 +15,29 @@ export default class EventManager {
     this.addTaskInput = document.querySelector("input.add_task");
     this.addTaskForm = document.querySelector("form.task_adder");
     this.removeCheckedBtn = document.querySelector("button.remove_checked");
+    this.options = document.querySelector("select.options");
     this.checkedAmount = 0;
     this.listenForTaskButtonClicks();
     this.listenForInputBlur();
     this.listenForFormSubmits();
     this.listenForCheckboxClicks();
-    this.listenForRemoveCheckedButtonClicks();
     this.listenForEnterKeyDown();
+    this.listenForSelectOptions();
+  }
+
+  listenForSelectOptions() {
+    if (this.options) {
+      this.options.addEventListener("change", (event: Event) => {
+        if ((event.target as HTMLSelectElement).value === "clear-selected") {
+          tm.removeCompletedTasks();
+          uim.hideRemoveCheckedButton();
+          uim.renderTasks();
+        }
+        if (this.options) {
+          this.options.selectedIndex = 0;
+        }
+      });
+    }
   }
 
   listenForEnterKeyDown() {
@@ -28,14 +45,6 @@ export default class EventManager {
       if (event.key === "Enter") {
         this.hideBtnShowIptAndFocus();
       }
-    });
-  }
-
-  listenForRemoveCheckedButtonClicks() {
-    this.removeCheckedBtn?.addEventListener("click", () => {
-      tm.removeCompletedTasks();
-      uim.hideRemoveCheckedButton();
-      uim.renderTasks();
     });
   }
 
@@ -56,12 +65,6 @@ export default class EventManager {
             this.increaseChecked();
           } else {
             this.decreaseChecked();
-          }
-
-          if (this.checkedAmount > 0) {
-            uim.showRemoveCheckedButton();
-          } else {
-            uim.hideRemoveCheckedButton();
           }
         }
       }
