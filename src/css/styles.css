@@ -1,5 +1,10 @@
 /* Semantic */
 
+.header {
+  position: relative;
+  margin-top: 1.5rem;
+}
+
 .header-text {
   font-size: 2rem;
 }
@@ -12,21 +17,61 @@
   margin: 0.5rem;
 }
 
+.header-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  border-bottom: 1px solid black;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+
+.header-bar select {
+  border: none;
+  text-align: end;
+  margin: 0.25rem 0.5rem;
+}
+
+.header-bar .project-text {
+  border-right: 1px solid black;
+  padding: 0.25rem 0.5rem;
+}
+
 .task-button-styling {
   margin-left: 0.5rem;
   color: rgb(82, 82, 82);
 }
 
-.task-input-styling {
-  border: none;
-  outline: none;
-  padding: 0.5rem;
+.header .remove_checked {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 0.25rem 1rem;
+  margin: 0.075rem 0;
+  border: 1px solid black;
+  background-color: rgb(240, 192, 192);
 }
 
-.todo-styling {
+input.add_task {
+  border: none;
+  outline: none;
+  padding: 0.75rem 0 0.6rem 2.5rem;
+}
+
+.list_content li {
+  user-select: none;
   display: flex;
-  padding: 0.75rem 0.5rem 0.5rem 0.5rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.144);
+  padding: 0.75rem 0.5rem 0.6rem 0.5rem;
+  border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+.list_content li > input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 2px;
+  margin-right: 12px;
 }
 
 .text-center {
@@ -53,12 +98,6 @@
   width: 100%;
 }
 
-input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  margin: 0 0.6rem 0 0.15rem;
-}
-
 /* Psuedo */
 button:hover,
 a:hover {
@@ -70,9 +109,13 @@ button.plus_button:hover {
   color: rgb(65, 218, 65);
 }
 
-.task-input-styling:focus {
+input.add_task:focus {
   outline: none;
   border-bottom: 1px solid black;
+}
+
+.header-bar select:focus {
+  outline: none;
 }
 
 /* Media Queries */

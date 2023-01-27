@@ -13,6 +13,35 @@
     <title>Todo List</title>
   </head>
   <body>
-    <div id="content"></div>
+    <div class="app_content page-padding">
+      <div class="header-bar">
+        <p class="project-text">"Default" project</p>
+        <select name="options" class="options">
+          <option value="nothing">options</option>
+          <option value="clear-selected">clear completed</option>
+          <option value="new-project">new project</option>
+        </select>
+      </div>
+      <div class="header">
+        <h1 class="header-text text-center">To-do List</h1>
+        <button class="remove_checked hidden">Remove</br>Checked</button>
+        <hr style="margin-bottom: 0" size="2" color="black" />
+      </div>
+      <ul class="list_content"></ul>
+      <button class="plus_button inline-flex width-100">
+        <div style="width: 24px; height: 24px">
+          <img src="/src/images/plus_icon.svg" alt="Plus Icon" />
+        </div>
+        <p
+          class="inline-flex align-items-center width-100 task-button-styling"
+          style="font-family: Cardo"
+        >
+          Add Task
+        </p>
+      </button>
+      <form class="task_adder">
+        <input type="text" name="task" class="add_task width-100 hidden" />
+      </form>
+    </div>
   </body>
 </html>
