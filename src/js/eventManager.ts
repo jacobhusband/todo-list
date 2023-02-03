@@ -7,6 +7,7 @@ export default class EventManager {
   addTaskForm: HTMLFormElement | null;
   removeCheckedBtn: HTMLButtonElement | null;
   options: HTMLSelectElement | null;
+  exitProjectModal: HTMLElement | null;
   checkedAmount: number;
 
   constructor() {
@@ -16,6 +17,7 @@ export default class EventManager {
     this.addTaskForm = document.querySelector("form.task_adder");
     this.removeCheckedBtn = document.querySelector("button.remove_checked");
     this.options = document.querySelector("select.options");
+    this.exitProjectModal = document.querySelector("button.exit");
     this.checkedAmount = 0;
     this.listenForTaskButtonClicks();
     this.listenForInputBlur();
@@ -23,6 +25,13 @@ export default class EventManager {
     this.listenForCheckboxClicks();
     this.listenForEnterKeyDown();
     this.listenForSelectOptions();
+    this.listenForExitProjectModal();
+  }
+
+  listenForExitProjectModal() {
+    this.exitProjectModal?.addEventListener("click", (event) => {
+      uim.hideProjectModal();
+    });
   }
 
   listenForSelectOptions() {
@@ -32,6 +41,10 @@ export default class EventManager {
           tm.removeCompletedTasks();
           uim.hideRemoveCheckedButton();
           uim.renderTasks();
+        } else if (
+          (event.target as HTMLSelectElement).value === "new-project"
+        ) {
+          uim.showProjectModal();
         }
         if (this.options) {
           this.options.selectedIndex = 0;

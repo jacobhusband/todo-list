@@ -3,11 +3,13 @@ import { tm } from "..";
 export default class UIManager {
   taskListEl: HTMLUListElement | null;
   removeCheckedBtn: HTMLButtonElement | null;
+  projectModal: HTMLElement | null;
 
   constructor() {
     this.renderTasks = this.renderTasks.bind(this);
     this.taskListEl = document.querySelector("ul.list_content");
     this.removeCheckedBtn = document.querySelector("button.remove_checked");
+    this.projectModal = document.querySelector(".modal.projects");
   }
 
   #createTaskElement = (task: { title: string; completed: boolean }): Node => {
@@ -45,5 +47,13 @@ export default class UIManager {
 
   hideRemoveCheckedButton = () => {
     this.removeCheckedBtn?.classList.add("hidden");
+  };
+
+  showProjectModal = () => {
+    this.projectModal?.classList.remove("hidden");
+  };
+
+  hideProjectModal = () => {
+    this.projectModal?.classList.add("hidden");
   };
 }

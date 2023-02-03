@@ -25,12 +25,38 @@
 .modal-content h2 {
   margin: 0.5rem;
   font-size: 1.5rem;
+  grid-column: 2;
+}
+
+.modal .exit-container {
+  grid-column: 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 1rem;
+  margin-top: 0.25rem;
+}
+
+.modal .exit {
+  width: 16px;
+  height: 16px;
+  padding: 0.5rem;
+}
+
+.modal img {
+  width: 100%;
 }
 
 .modal-content hr {
-  margin: 0.5rem;
+  margin: 0 0.5rem;
   border: none;
   border-top: 0.25px solid black;
+}
+
+.modal .header-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
 }
 
 .header {
