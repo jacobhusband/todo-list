@@ -2,9 +2,11 @@ export default class TaskManager {
   tasks: { title: string; completed: boolean }[];
   removeCheckedBtn: HTMLButtonElement | null;
   name: string;
+  id: number;
 
-  constructor() {
-    this.name = "Default";
+  constructor(name: string, id: number) {
+    this.name = name;
+    this.id = id;
     this.tasks = [];
     this.removeCheckedBtn = document.querySelector("button.remove_checked");
   }
