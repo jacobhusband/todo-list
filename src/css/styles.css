@@ -1,5 +1,38 @@
 /* Semantic */
 
+.modal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+}
+
+.modal-content {
+  align-self: center;
+  margin: auto;
+  width: 300px;
+  height: 300px;
+  border-radius: 0.25rem;
+  border: 1px solid black;
+  background-color: aliceblue;
+  box-shadow: 2px 2px 10px #999999;
+  text-align: center;
+}
+
+.modal-content h2 {
+  margin: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.modal-content hr {
+  margin: 0.5rem;
+  border: none;
+  border-top: 0.25px solid black;
+}
+
 .header {
   position: relative;
   margin-top: 1.5rem;
